@@ -1,18 +1,20 @@
 import { existsSync, copyFileSync, mkdirSync, writeFileSync } from 'fs';
-
+import { replaceInFileSync } from 'replace-in-file';
 /**
  * Creates the boilerplate code for a new puzzle
- * Usage: npm run init-day {dayNumber} i.e npm run 1
+ * Usage: npm run init-day {dayNumber} i.e npm run init-day 1
  * It will create a new folder under src/days/{dayNumber}
- * with the boilerplate code to build the solution, and an empty input .txt file.
+ * with the boilerplate code to build the solution, and an empty input.txt and test.txt file.
  */
 
 const args = process.argv.slice(2);
 const day = args[0];
 if (!day) {
   console.log('Please run with the day to bootstrap, i.e. npm run init-day 1');
+  process.exit(0);
 }
-console.log(`creating template for day ${2}`);
+
+console.log(`creating template for day ${day}`);
 const basePath = 'src/days';
 
 if (existsSync(`src/days/${day}`)) {
@@ -22,4 +24,13 @@ if (existsSync(`src/days/${day}`)) {
 const newDayPath = `${basePath}/${day}`;
 mkdirSync(newDayPath);
 copyFileSync(`${__dirname}/Puzzle.ts.tpl`, `${newDayPath}/Puzzle.ts`);
-writeFileSync(`${newDayPath}/input.txt`, '');
+copyFileSync(`${__dirname}/puzzle.spec.ts.tpl`, `${newDayPath}/puzzle.spec.ts`);
+replaceInFileSync({
+  files: `${newDayPath}/puzzle.spec.ts`,
+  from: /\$\{day\}/g,
+  to: `${day}`,
+});
+
+mkdirSync(`${newDayPath}/input`);
+writeFileSync(`${newDayPath}/input/input.txt`, '');
+writeFileSync(`${newDayPath}/input/test.txt`, '');

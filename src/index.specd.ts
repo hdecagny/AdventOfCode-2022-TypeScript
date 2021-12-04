@@ -9,7 +9,10 @@ describe('AoC test runner', () => {
 
   for (const day of dirs) {
     it(`Tests day ${day}`, async () => {
-      const puzzle: PuzzleInterface = await PuzzleFactory.getPuzzle(day);
+      const puzzle: PuzzleInterface = await PuzzleFactory.getPuzzle(
+        day,
+        'test'
+      );
       expect(puzzle.solveFirst()).toEqual(puzzle.getFirstExpectedResult());
       expect(puzzle.solveSecond()).toEqual(puzzle.getSecondExpectedResult());
     });

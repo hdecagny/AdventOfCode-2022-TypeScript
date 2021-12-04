@@ -2,11 +2,11 @@ import Puzzle from '../types/AbstractPuzzle';
 import readFile from './readFile';
 
 class PuzzleFactory {
-  public async getPuzzle(puzzleName: string) {
+  public async getPuzzle(puzzleName: string, inputFile: string) {
     const puzzlePath = `src/days/${puzzleName}`;
     let input = '';
     try {
-      input = await readFile(`${puzzlePath}/input.txt`);
+      input = await readFile(`${puzzlePath}/input/${inputFile}.txt`);
     } catch (error) {
       console.error(error);
       process.exit(1);
