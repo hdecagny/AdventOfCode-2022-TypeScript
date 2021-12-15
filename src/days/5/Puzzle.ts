@@ -14,7 +14,9 @@ export default class ConcretePuzzle extends Puzzle {
   private parseInput(): Coord[] {
     const lines = this.input.split('\n');
     return lines.reduce((acc, next) => {
-      const [_, x1, y1, x2, y2] = next.match(/(\d+),(\d+) -> (\d+),(\d+)/);
+      const [x1, y1, x2, y2] = next
+        .match(/(\d+),(\d+) -> (\d+),(\d+)/)
+        .slice(1);
       const newItem = {
         x1: +x1,
         y1: +y1,
@@ -69,7 +71,7 @@ export default class ConcretePuzzle extends Puzzle {
     }
 
     return Array.from(pointsMap.entries())
-      .filter(([_, value]) => value >= 2)
+      .filter((p) => p[1] >= 2)
       .length.toString();
   }
 
