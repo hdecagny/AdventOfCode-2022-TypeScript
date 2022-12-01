@@ -75,9 +75,9 @@ module.exports = {
     'template-curly-spacing': ['error', 'never'],
     'no-multiple-empty-lines': 'off',
     'jest/no-disabled-tests': 'warn',
-    'jest/no-focused-tests': 'error',
-    'jest/no-identical-title': 'error',
+    'jest/no-focused-tests': 'warn',
+    'jest/no-identical-title': 'warn',
     'jest/prefer-to-have-length': 'warn',
-    'jest/valid-expect': 'error',
+    'jest/valid-expect': 'warn',
   },
 };
