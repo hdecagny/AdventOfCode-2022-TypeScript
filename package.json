@@ -6,6 +6,7 @@
   "scripts": {
     "build": "rm -rf dist && tsc && npm run cp:inputs",
     "cp:inputs": "ts-node src/scripts/copyInputFiles.ts",
+    "debug": "nodemon input 1",
     "dev": "nodemon input",
     "dev:test": "nodemon test",
     "init-day": "ts-node src/scripts/initNewDay/initNewDay.ts",
